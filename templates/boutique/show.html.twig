@@ -1,0 +1,32 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Détail{% endblock %}
+
+{% block body %}
+
+    <section class="row article">
+            <article
+                class="col-md-3 mx-auto text-center border border-dark mb-3 p-3 mt-3 mr-1">
+                
+                <h2>{{ produit.titre }}</h2>
+                
+                <div class="content">
+                    <img src="{{ asset('images/produits/' ~ produit.photo ) }}" alt="" class="img-fluid col-md-12">
+                    {{ produit.description|raw }}
+                    <br>
+                    Prix : {{ produit.prix }} €
+                    <br>
+                    Couleur : {{ produit.couleur }} / Taille : {{ produit.taille }}
+                    <br>
+                    {% if app.user %}
+                        <a href="{{ path('panier_add') }}" class="btn btn-sm btn-warning">Ajouter au panier</a>
+                    {% else %}
+                        <a href="{{ path('app_login') }}" class="btn btn-sm btn-warning">Se connecter</a>
+                        <a href="{{ path('app_register') }}" class="btn btn-sm btn-danger">Créer un compte</a>
+                    {% endif %}
+                    
+                </div>
+            </article>
+        </section>
+
+{% endblock %}

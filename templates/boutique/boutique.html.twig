@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Boutique{% endblock %}
+
+{% block body %}
+
+<section class="row articles">
+
+    {% for produit in tabProduits %}
+        
+    <article class="col-md-4 mx-auto text-center border border-dark mb-3 p-3 mt-3 mr-1">
+        
+        <h2>{{ produit.titre }}</h2>
+                
+        <div class="content">
+            <img src="{{ asset('images/produits/' ~ produit.photo ) }}" alt="" class="img-fluid">
+            <a href="{{ path('show_produit', {id: produit.id}) }}" class="btn btn-primary">Détail</a>
+            {{ produit.prix }} €
+        </div>
+        
+    </article>
+    {% endfor %}
+</section>
+
+{% endblock %}
