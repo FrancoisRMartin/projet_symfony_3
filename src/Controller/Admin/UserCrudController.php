@@ -28,7 +28,6 @@ class UserCrudController extends AbstractCrudController
     {
         return User::class;
     }
-
     
     public function configureFields(string $pageName): iterable
     {
@@ -36,18 +35,18 @@ class UserCrudController extends AbstractCrudController
             IdField::new('id')->onlyOnIndex(),
             TextField::new('pseudo', 'Pseudo'),
             TextField::new('password', 'Mot de passe')
-                ->setFormType(RepeatedType::class)
+                ->setFormType(PasswordType::class)
                 ->onlyOnForms()
                 ->onlyWhenCreating(),
             EmailField::new('email', 'E-mail'),
             ChoiceField::new('civilite', 'Civilité')->setChoices([
-                'Monsieur' => 'm',
-                'Madame' => 'f',
-                'Mx' => 'x',
+                'Monsieur' => 'Homme',
+                'Madame' => 'Femme',
+                'Mx' => 'Mixte',
             ]),
             TextField::new('nom', 'Nom'),
             TextField::new('prenom', 'Prénom'),
-            CollectionField::new('roles', 'Roles')->setTemplatePath('admin/field/roles.html.twig'),
+            CollectionField::new('roles', 'Statut')->setTemplatePath('admin/field/roles.html.twig'),
             DateTimeField::new('dateEnregistrement', "Date<br>Enregistrement")->setFormat("dd/MM/Y HH:mm:ss"),
         ];
     }

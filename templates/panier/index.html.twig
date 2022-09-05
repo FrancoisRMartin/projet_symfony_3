@@ -8,33 +8,44 @@
    
     {% if items %} 
     
-        <table class="table">
-            <thead>
+        <table class="table table-bordered table-striped">
+            <thead class="table-dark">
                 <tr>
                     <th>Produit</th>
                     <th>Photo</th>
                     <th>Description</th>
                     <th>Prix</th>
                     <th>Quantité</th>
+                    <th>Total</th>
                     <th>Actions</th>
                 </tr>
             </thead>
-        </table>      
+              
 
         <tbody>
             {% for item in items %}
-                <tr>
-                    <td>{{ item.produit.titre }}
+                <tr class="align-middle">
+                    <td>{{ item.produit.titre }}<br><br>
                         {{ item.produit.collection }}
                     </td>
-                    <td>{{ item.produit.photo }}</td>
-                    <td>{{ item.produit.description }}<br>
-                        {{ item.produit.taille }} / {{ item.produit.couleur }}
+                    <td><img src="{{ asset('images/produits/' ~ item.produit.photo ) }}" alt="" class="img-fluid col-md-12" style="width: 100px;"></td>
+                    <td>{{ item.produit.description|raw }}<br>
+                        Taille : {{ item.produit.taille }}<br>
+                        Couleur : {{ item.produit.couleur }}
                     </td>
-                    <td>{{ item.produit.prix }}</td>
-                    <td>{{ item.produit.stock }}</td>
-                    <td>
-                        <a href="{{ path('panier_remove') }}" class="btn-sm btn-danger">
+                    <td>{{ item.produit.prix }} €</td>
+                    <td class="text-center">
+                        <a href="{{ path('panier_minus', {id: item.produit.id}) }}" class="btn btn-warning" style="color:white; width:40px">
+                            <i class="fas fa-minus"></i>
+                        </a>
+                        ( {{ item.quantite }} )
+                        <a href="{{ path('panier_add', {id: item.produit.id}) }}" class="btn btn-success" style="width:40px">
+                            <i class="fas fa-plus"></i>
+                        </a>
+                    </td>
+                    <td>{{ item.quantite * item.produit.prix }} €</td>
+                    <td class="text-center">
+                        <a href="{{ path('panier_remove', {id: item.produit.id}) }}" class="btn btn-danger">
                             <i class="fas fa-trash"></i>
                         </a>
                     </td>
@@ -43,10 +54,23 @@
         </tbody>
         <tfoot>
             <tr>
-                <td colspan="3" class="text-end">Total :</td>
+                <th colspan="5" class="text-end">Total panier :</th>
                 <td>{{ total }} €</td>
             </tr>
+        </tfoot>
+        </table>
 
+        <div class="container text-end">
+            <a href="{{ path('panier_delete_all') }}" class="btn btn-danger">
+                <i class="fas fa-trash"></i> | Vider le panier
+            </a>
+            <a href="#" class="btn btn-success">
+                <i class="fas fa-plus"></i> | Valider la commande
+            </a>
+        </div>
+        <div>
+            
+        </div>
     {% endif %}
 
 {% endblock %}

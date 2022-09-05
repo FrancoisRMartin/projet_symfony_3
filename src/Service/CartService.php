@@ -29,14 +29,32 @@ class CartService
         $session->set('cart', $cart);
     }
 
+    public function minus($id)
+    {
+        $session = $this->rs->getSession();
+        $cart = $session->get('cart', []);
+
+        if (!empty($cart[$id])){
+            if($cart[$id] > 1) {
+                $cart[$id]--;
+            }
+            else {
+                unset($cart[$id]);
+            }
+        }
+        // On sauvegarde la session
+        $session->set('cart', $cart);
+    }
+    
     public function remove($id)
     {
         $session = $this->rs->getSession();
         $cart = $session->get('cart', []);
 
-        if (!empty($cart[$id]))
-            unset($cart[$id]);
-
+        if (!empty($cart[$id])){
+                unset($cart[$id]);
+        }
+        // On sauvegarde la session
         $session->set('cart', $cart);
     }
 
@@ -66,7 +84,7 @@ class CartService
 
         foreach($this->getCartWithData() as $item)
         {
-            $totalItem = $item['produit']->getPrice() * $item['quantite'];
+            $totalItem = $item['produit']->getPrix() * $item['quantite'];
             $total += $totalItem;
         }
 

@@ -31,9 +31,9 @@ class ProduitCrudController extends AbstractCrudController
             TextareaField::new('description', 'Description')->renderAsHtml()->hideOnForm(),
             TextEditorField::new('description', 'Description')->onlyOnForms(),
             ChoiceField::new('collection', 'Collection')->setChoices([
-                'Homme' => 'm',
-                'Femme' => 'f',
-                'Mixte' => 'x',
+                'Homme' => 'Homme',
+                'Femme' => 'Femme',
+                'Mixte' => 'Mixte',
             ]),
             ChoiceField::new('couleur', 'Couleur')->setChoices([
                 'Blanc' => 'blanc',
@@ -41,21 +41,23 @@ class ProduitCrudController extends AbstractCrudController
                 'Bleu' => 'bleu',
                 'Rouge' => 'rouge',
                 'Vert' => 'vert',
+                'Gris' => 'gris',
             ]),
             ChoiceField::new('taille', 'Taille')->setChoices([
-                'S' => 's',
-                'M' => 'm',
-                'L' => 'l',
+                'S' => 'S',
+                'M' => 'M',
+                'L' => 'L',
             ]),
-            MoneyField::new('prix')->setCurrency('EUR'),
+            IntegerField::new('prix'),
+            //MoneyField::new('prix')->setCurrency('EUR')->setStoredAsCents(false),
             IntegerField::new('stock'),
             ImageField::new('photo')
                 ->setBasePath('images/produits/')
                 ->setUploadDir('public/images/produits')
                 ->setRequired(false)
                 ->setUploadedFileNamePattern('[ulid].[extension]'),
-            DateTimeField::new('dateEnregistrement', "Date<br>Enregistrement")->setFormat("dd/MM/Y HH:mm:ss"),
-            DateTimeField::new('updatedAt', 'Date de MAJ')->onlyOnForms(),
+            //DateTimeField::new('dateEnregistrement', "Date<br>Enregistrement")->setFormat("dd/MM/Y HH:mm:ss"),
+            //DateTimeField::new('updatedAt', 'Date de MAJ')->onlyOnForms(),
         ];
     }
 

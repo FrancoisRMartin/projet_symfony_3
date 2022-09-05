@@ -1,7 +1,41 @@
-{% extends 'base.html.twig' %}
+{% extends "base.html.twig" %}
 
-{% block title %}Hello ProfilController!{% endblock %}
+{% block title %}Détail{% endblock %}
 
 {% block body %}
+    
+    <div class="display-5 fw-bold text-white p-5 text-center mb-5" style="width:100%; background-color: grey; min-height: 250px;">
+        <h1 class="display-4 my-1 fw-bold">Bienvenue chez MyShop!</h1>
+    </div>
+
+    <section class="row articles">
+
+    {% for produit in tabProduits %}
+        
+    <article class="col-md-4 text-center mb-5">
+				<div class="border">
+					<a href="{{ path('show_produit', {id: produit.id}) }}" class="btn btn-info">
+						<div style="background-color:">
+							<h4>{{ produit.titre }}</h4>
+							<div class="d-flex justify-content-between">
+								<h5 class="d-flex">T-shirt :
+									{{ produit.collection }}</h5>
+								<span class="btn btn-warning">{{ produit.prix }} €</span>
+							</div>
+						</div>
+						<img src="{{ asset('images/produits/' ~ produit.photo ) }}" alt="" class="img-fluid">
+						<div class="d-grid gap-2 my-2">
+							<h3>Acheter maintenant</h3>
+						</div>
+					</a>
+				</div>
+			</article>
+    {% endfor %}
+</section>
+
+<div class="text-end">
+  <a href="{{ path('app_produits') }}" class="btn btn-warning btn-lg">Voir tous les articles</a>
+</div>
+
 
 {% endblock %}

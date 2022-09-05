@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello PanierController!{% endblock %}
+
+{% block body %}
+
+    <h1 class="text-center">Vos commandes</h1>
+   
+    {% if app.user is not null %}
+
+		<section class="row article">
+			<article
+				class="col-md-3 mx-auto text-center border border-dark mb-3 p-3 mt-3 mr-1">
+				{# SYMPHONY accède à la propriété title de l'objet article via son GETTER #}
+				<h2>Votre profil</h2>
+				{# date() est un filtre TWIG permettant de formater/convertir un objet DateTime en une chaîne de caractères #}
+				<div>Id:
+					{{ app.user.id }}</div>
+				<div>Nom:
+					{{ app.user.nom }}</div>
+				<div>Prénom:
+					{{ app.user.prenom }}</div>
+				<div>E-mail:
+					{{ app.user.email }}</div>
+			</article>
+		</section>
+		
+		<table class="table table-striped">
+			<thead class="table-dark">
+				<tr>
+					<th>Produit</th>
+                    <th>Photo</th>
+                    <th>Quantité</th>
+					<th>Total</th>
+					<th>Etat de traitement</th>
+                    <th>Date d'enregistrement</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for commande in tabCommandes %}
+					<tr class="align-middle">
+						<td>{{ commande.produit.titre }}</td>
+                        <td><img src="{{ asset('images/produits/' ~ commande.produit.photo ) }}" alt="" class="img-fluid col-md-12" style="width: 100px;"></td>
+                        <td>{{ commande.quantite }}</td>
+                        <td>{{ commande.montant }}</td>
+                        <td>{{ commande.etat }}</td>
+						<td>{{ commande.dateEnregistrement|date('d/m/Y à H:m:s') }}</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	{# {% else %}
+		<div class="alert alert-danger text-center">
+			Il faut être connecté pour voir son profil et ses commentaires !</div> #}
+	{% endif %}
+
+{% endblock %}

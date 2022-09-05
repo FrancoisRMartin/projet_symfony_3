@@ -1,25 +1,36 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Boutique{% endblock %}
+{% block title %}Boutique
+{% endblock %}
 
 {% block body %}
 
-<section class="row articles">
+	<h1 class="text-right mt-5" style="color:">Notre catalogue :</h1>
 
-    {% for produit in tabProduits %}
-        
-    <article class="col-md-4 mx-auto text-center border border-dark mb-3 p-3 mt-3 mr-1">
-        
-        <h2>{{ produit.titre }}</h2>
-                
-        <div class="content">
-            <img src="{{ asset('images/produits/' ~ produit.photo ) }}" alt="" class="img-fluid">
-            <a href="{{ path('show_produit', {id: produit.id}) }}" class="btn btn-primary">Détail</a>
-            {{ produit.prix }} €
-        </div>
-        
-    </article>
-    {% endfor %}
-</section>
+	<section class="row articles">
+
+		{% for produit in tabProduits %}
+
+			<article class="col-md-3 p-0 text-center">
+				<div class="border">
+					<a href="{{ path('show_produit', {id: produit.id}) }}" class="btn btn-info">
+						<div style="background-color:">
+							<h4>{{ produit.titre }}</h4>
+							<div class="d-flex justify-content-between">
+								<h5 class="d-flex">T-shirt :
+									{{ produit.collection }}</h5>
+								<span class="btn btn-warning">{{ produit.prix }} €</span>
+							</div>
+						</div>
+						<img src="{{ asset('images/produits/' ~ produit.photo ) }}" alt="" class="img-fluid">
+						<div class="d-grid gap-2 my-2">
+							<h3>Acheter maintenant</h3>
+						</div>
+						{# <div class="d-grid gap-2"></div> #}
+					</a>
+				</div>
+			</article>
+		{% endfor %}
+	</section>
 
 {% endblock %}

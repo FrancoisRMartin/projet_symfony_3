@@ -13,9 +13,13 @@ class BoutiqueController extends AbstractController
     /**
      * @Route("/", name="home")
      */
-    public function home(): Response
+    public function home(ProduitRepository $repo): Response
     {
-        return $this->render('boutique/index.html.twig');
+        
+        $produits = $repo->findBy([], ['dateEnregistrement' => 'DESC'], 3); // ou ASC pour le premier créé
+        return $this->render('boutique/index.html.twig', [
+            'tabProduits' => $produits
+        ]);
     }
 
     /**

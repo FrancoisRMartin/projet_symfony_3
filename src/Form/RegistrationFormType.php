@@ -23,12 +23,6 @@ class RegistrationFormType extends AbstractType
             ->add('email')
             ->add('nom')
             ->add('prenom')
-            ->add('civilite', ChoiceType::class, array(
-                'choices' => [
-                    'Monsieur' => 'm',
-                    'Madame' => 'f',
-                ]
-            ))
             ->add('plainPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'invalid_message' => 'Les mots de passes ne correspondent pas !',
@@ -48,6 +42,12 @@ class RegistrationFormType extends AbstractType
                     ]),
                 ],
             ])
+            ->add('civilite', ChoiceType::class, array(
+                'choices' => [
+                    'Monsieur' => 'm',
+                    'Madame' => 'f',
+                ]
+            ))
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
                 'constraints' => [

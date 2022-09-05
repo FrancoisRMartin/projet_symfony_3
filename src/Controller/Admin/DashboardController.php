@@ -24,7 +24,7 @@ class DashboardController extends AbstractDashboardController
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
-            ->setTitle('MyShop AddEasyAdmin');
+            ->setTitle('MyShop-Backoffice');
     }
 
     public function configureMenuItems(): iterable
