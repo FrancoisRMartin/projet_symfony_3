@@ -29,10 +29,10 @@
 						<a class="nav-link" href="{{ path('app_produits') }}">Liste des articles</a>
 						{% if app.user %}
 							<a class="nav-link" href="{{ path('app_profil') }}">Mon compte</a>
-							<a class="nav-link" href="{{ path('app_panier') }}">Mon panier
+							<a class="nav-link" href="{{ path('app_panier') }}">Mon panier :
 							{% set nbProduits = app.session.get('qt') %}
 							{% if nbProduits > 0 %}
-								<span class="position-absolute top-25 start-100 translate-middle badge rounded-pill bg-danger">{{ nbProduits }}</span>
+								<span class="position-absolute badge rounded-pill bg-danger mt-0 mx-2">{{ nbProduits }}</span>
 							{% endif %}
 							
 							
